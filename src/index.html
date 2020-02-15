@@ -57,24 +57,82 @@
             <p class="text-center">Loading...</p>
           </div>
           <div id="content">
+            <table class="table" id="unApprovedTable">
+              <thead>
+                <tr>
+                  <th scope="col">Approved</th>
+                  <th scope="col">Deutsche Bank</th>
+                  <th scope="col">European Central Bank</th>
+                  <th scope="col">Nord/LP</th>
+                  <th scope="col">Company Name</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Country</th>
+                  <th scope="col">Earnings</th>
+                  <th scope="col">Income</th>
+                  <th scope="col">Stock Price</th>
+                  <th scope="col">Share Numbers</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+
+            <template id="companyListingRow">
+              <tr class="template">
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1a" checked>
+                        <label class="custom-control-label" for="customCheck1a"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1b" checked>
+                        <label class="custom-control-label" for="customCheck1b"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1c" checked>
+                        <label class="custom-control-label" for="customCheck1c"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1d" checked>
+                        <label class="custom-control-label" for="customCheck1d"></label>
+                    </div>
+                  </td>
+                  <td>Bootstrap 4 CDN and Starter Template</td>
+                  <td>Cristina</td>
+                  <td>913</td>
+                  <td>2.846</td>
+                  <td>2323</td>
+                  <td>2.846</td>
+                  <td>2323</td>
+                </tr>
+            </template>
+
             <!-- <form onSubmit="App.createTask(); return false;">
               <input id="newTask" type="text" class="form-control" placeholder="Add task..." required>
               <input type="submit" hidden="">
             </form> -->
-            <ul id="taskList" class="list-unstyled">
-              <div class="taskTemplate" class="checkbox" style="display: none">
+<!--             <ul id="companyListings" class="list-unstyled">
+              <div class="companyListingTemplate" class="checkbox" style="display: none">
                 <label>
                   <input type="checkbox" />
-                  <span class="content">Task content goes here...</span>
+                  <span class="content">Company content goes here...</span>
                 </label>
               </div>
             </ul>
-            <ul id="completedTaskList" class="list-unstyled">
-            </ul>
+            <ul id="approvedCompanyListings" class="list-unstyled">
+            </ul> -->
           </div>
         </main>
       </div>
     </div>
+
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
