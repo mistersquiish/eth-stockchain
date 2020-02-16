@@ -164,7 +164,7 @@ App = {
 		    	
 		    }
 
-		    // fill rest of the template with information we got from blockchain
+		    // fill rest of the template with information we got from the blockchain
 		    td[1].textContent = (approved === true) ? "Approved" : "Not Approved";
 		    (dbApproved === true) ? td[2].append(approvedHTML.cloneNode()) : td[2].append(unapprovedHTML.cloneNode());
 		    (ecbApproved === true) ? td[3].append(approvedHTML.cloneNode()) : td[3].append(unapprovedHTML.cloneNode());
@@ -172,23 +172,24 @@ App = {
 		    td[5].textContent = companyName;
 		    td[6].textContent = companyMailingAddress;
 		    td[7].textContent = country;
-		    td[8].textContent = earnings;
-		    td[9].textContent = income;
-		    td[10].textContent = stockPrice;
+		    td[8].textContent = "$" + earnings;
+		    td[9].textContent = "$" + income;
+		    td[10].textContent = "$" + stockPrice;
 		    td[11].textContent = numShares;
 
 		    // add the listing to the correct table (approved or unapproved)
 		    var tbody;
 		    if (approved === true) {
-		    	tbody = document.querySelector("#approved-tbody");
+		    	tbody = document.querySelector("#approvedTBody");
 		    } else {
-		    	tbody = document.querySelector("#unapproved-tbody");
+		    	tbody = document.querySelector("#unapprovedTBody");
 		    }
 		    tbody.appendChild(clone);
 		    
 	    }
   	},
 
+  	// loading indicator effect
 	setLoading: (boolean) => {
 	    App.loading = boolean
 	    const loader = $('#loader')
@@ -204,6 +205,7 @@ App = {
 
 }
 
+// approve company listing
 $(document).on("click", ".btn-approveCompanyListing", async function() {
 	App.setLoading(true)
 	const companyListingId = this.id.split("-")[2]
