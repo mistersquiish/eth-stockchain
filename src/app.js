@@ -67,17 +67,48 @@ App = {
 	    // Render Account
 	    $('#account').html(App.account)
 
+	    // Render Bank Information
+	    await App.renderBanks()
+
+	    // Render Authorization
+	    await App.renderAuthorization()
+
 	    // Render Tasks
-	    await App.renderTasks()
+	    await App.renderListings()
 
 	    // Update loading state
 	    App.setLoading(false)
 	},
 
-	renderTasks: async () => {
+	renderBanks: async () => {
+		// Load the total bank count from the blockchain
+	    const bankCount = await App.companyListing.bankCount()
+	    var banks = {}
+	    // Render out each bank
+	    for (var i = 1; i <= bankCount; i++) {
+	    	const bank = await App.companyListing.banks(i)
+	    	const bankId = bank[0].toNumber()
+	    	const bankAddress = bank[1]
+	    	const bankName = bank[2]
+
+	    	banks[bankAddress] = bankName
+	    }
+	    App.banks = banks
+	    
+	},
+
+	renderAuthorization: async() => {
+		if (App.account in App.banks) {
+	    	App.authorized = true
+	    	document.querySelector('#welcome-message').textContent = "Welcome " + App.banks[App.account] + "! These listings require your attention."
+	    } else {
+	    	App.authorized = false
+	    }
+	},
+
+	renderListings: async () => {
 	    // Load the total company listing count from the blockchain
 	    const listingCount = await App.companyListing.listingCount()
-	    const $companyListingTemplate = $('.companyListingTemplate')
 
 	    // create html elements to programatically add them to index.html
 	    var approvedHTML = document.createElement("i")
@@ -102,9 +133,9 @@ App = {
 	   		const approved = listing[1]
 	   		const dbApproved = listing[2]
 	   		const ecbApproved = listing[3]
-	   		const nlbApproved = listing[4]
+	   		const nlApproved = listing[4]
 	      	const companyName = listing[5]
-	      	const companyAddress = listing[6]
+	      	const companyMailingAddress = listing[6]
 	      	const country = listing[7]
 	      	const earnings = listing[8]
 	      	const income = listing[9]
@@ -112,34 +143,49 @@ App = {
 	      	const numShares = listing[11]
 
 			
-		    // Clone the new row and insert it into the table
+		    // Clone the new row and populate with data from blockchain
 		    var rowTemplate = document.querySelector('#companyListingRow');
-		    var tbody = document.querySelector("tbody");
 		    var clone = rowTemplate.content.cloneNode(true);
 		    var td = clone.querySelectorAll("td");
 
-		    // set id for approveListing button
-		    //var newApproveButton = "";
-		    var newApproveButton = approveButton.cloneNode(true);
-		    newApproveButton.setAttribute("id", "btn-company-" + listingId);
-		    td[0].append(newApproveButton);
+		    // if verified bank and hasn't approved yet, add approval buttons
+		    if (App.authorized === true) {
+		    	if ((App.banks[App.account] === "Deutsche Bank" && dbApproved === false) ||
+		    		(App.banks[App.account] === "European Central Bank" && ecbApproved === false) ||
+		    		(App.banks[App.account] === "Norddeutsche Landesbank" && nlApproved === false)) {
+		    			// set id for approveListing button
+					    //var newApproveButton = "";
+					    var newApproveButton = approveButton.cloneNode(true);
+					    newApproveButton.setAttribute("id", "btn-company-" + listingId);
+					    td[0].append(newApproveButton);
+		    	   } else {
+		    	   		td[0].textContent = "You already approved"
+		    	   }
+		    	
+		    }
 
+		    // fill rest of the template with information we got from blockchain
 		    td[1].textContent = (approved === true) ? "Approved" : "Not Approved";
 		    (dbApproved === true) ? td[2].append(approvedHTML.cloneNode()) : td[2].append(unapprovedHTML.cloneNode());
 		    (ecbApproved === true) ? td[3].append(approvedHTML.cloneNode()) : td[3].append(unapprovedHTML.cloneNode());
-		    (nlbApproved === true) ? td[4].append(approvedHTML.cloneNode()) : td[4].append(unapprovedHTML.cloneNode());
+		    (nlApproved === true) ? td[4].append(approvedHTML.cloneNode()) : td[4].append(unapprovedHTML.cloneNode());
 		    td[5].textContent = companyName;
-		    td[6].textContent = companyAddress;
+		    td[6].textContent = companyMailingAddress;
 		    td[7].textContent = country;
 		    td[8].textContent = earnings;
 		    td[9].textContent = income;
 		    td[10].textContent = stockPrice;
 		    td[11].textContent = numShares;
+
+		    // add the listing to the correct table (approved or unapproved)
+		    var tbody;
+		    if (approved === true) {
+		    	tbody = document.querySelector("#approved-tbody");
+		    } else {
+		    	tbody = document.querySelector("#unapproved-tbody");
+		    }
 		    tbody.appendChild(clone);
-
-
-	      // Show the company listing
-	      //$newCompanyListingTemplate.show()
+		    
 	    }
   	},
 
@@ -158,7 +204,12 @@ App = {
 
 }
 
-$(document).on("click", ".btn-approveCompanyListing", function() {
+$(document).on("click", ".btn-approveCompanyListing", async function() {
+	App.setLoading(true)
+	const companyListingId = this.id.split("-")[2]
+	console.log(companyListingId)
+    await App.companyListing.approveListing(companyListingId)
+    window.location.reload()
 	console.log(this.id);
 });
 

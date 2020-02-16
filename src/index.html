@@ -57,8 +57,13 @@
             <p class="text-center">Loading...</p>
           </div>
           <div id="content">
-            <table class="table" id="unApprovedTable">
+            <table class="table" id="unapproved-table">
               <thead>
+                <TR>
+                  <TH COLSPAN="11">
+                     <H3 id="welcome-message"><BR>Welcome Public</H3>
+                  </TH>
+               </TR>
                 <tr>
                   <th scope="col"></th>
                   <th scope="col">Approved</th>
@@ -74,7 +79,7 @@
                   <th scope="col">Share Numbers</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="unapproved-tbody">
               </tbody>
             </table>
 
@@ -95,24 +100,73 @@
                 </tr>
             </template>
 
-            <!-- <form onSubmit="App.createTask(); return false;">
-              <input id="newTask" type="text" class="form-control" placeholder="Add task..." required>
-              <input type="submit" hidden="">
-            </form> -->
-<!--             <ul id="companyListings" class="list-unstyled">
-              <div class="companyListingTemplate" class="checkbox" style="display: none">
-                <label>
-                  <input type="checkbox" />
-                  <span class="content">Company content goes here...</span>
-                </label>
-              </div>
-            </ul>
-            <ul id="approvedCompanyListings" class="list-unstyled">
-            </ul> -->
           </div>
         </main>
       </div>
     </div>
+
+
+      <div class="container-fluid>
+        <div class="row">
+          <main role="main" class="col-lg-12 d-flex justify-content-center">
+            <div>
+                <table class="table" id="approved-table">
+                  <thead>
+                    <TR>
+                      <TH COLSPAN="11">
+                         <H5><BR>Approved Company Listings</H5>
+                      </TH>
+                    </TR>
+                    <tr>
+                      <th></th>
+                      <th scope="col">Approved</th>
+                      <th scope="col">Deutsche Bank</th>
+                      <th scope="col">European Central Bank</th>
+                      <th scope="col">Nord/LP</th>
+                      <th scope="col">Company Name</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Country</th>
+                      <th scope="col">Earnings</th>
+                      <th scope="col">Income</th>
+                      <th scope="col">Stock Price</th>
+                      <th scope="col">Share Numbers</th>
+                    </tr>
+                  </thead>
+                  <tbody id="approved-tbody">
+                  </tbody>
+              </table>
+            </div>
+          </main>
+        </div>
+      </div>
+<!-- 
+      <div class="row">
+        <main role="main" class="col-lg-12 d-flex justify-content-center">
+          <div id="content">
+            <table class="table" id="approvedTable">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Approved</th>
+                  <th scope="col">Deutsche Bank</th>
+                  <th scope="col">European Central Bank</th>
+                  <th scope="col">Nord/LP</th>
+                  <th scope="col">Company Name</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Country</th>
+                  <th scope="col">Earnings</th>
+                  <th scope="col">Income</th>
+                  <th scope="col">Stock Price</th>
+                  <th scope="col">Share Numbers</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div> -->
 
 
 
