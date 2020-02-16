@@ -79,11 +79,19 @@ App = {
 	    const listingCount = await App.companyListing.listingCount()
 	    const $companyListingTemplate = $('.companyListingTemplate')
 
+	    // approved and unapproved symbols
+	    var approvedHTML = document.createElement("i")
+	    approvedHTML.classList.add('fas');
+	    approvedHTML.classList.add('fa-check');
+
+	    var unapprovedHTML = document.createElement("i")
+	    unapprovedHTML.classList.add('fas');
+	    unapprovedHTML.classList.add('fa-times');
+
 	    // Render out each company listing with a new company listing template
 	    for (var i = 1; i <= listingCount; i++) {
     		// Fetch the company listing data from the blockchain
 	    	const listing = await App.companyListing.listings(i)
-	    	console.log(listing)
 	     	const listingId = listing[0].toNumber()
 	   		const approved = listing[1]
 	   		const dbApproved = listing[2]
@@ -102,6 +110,10 @@ App = {
 		    var tbody = document.querySelector("tbody");
 		    var clone = template.content.cloneNode(true);
 		    var td = clone.querySelectorAll("td");
+		    td[0].textContent = (approved === true) ? "Approved" : "Not Approved";
+		    (dbApproved === true) ? td[1].append(approvedHTML.cloneNode()) : td[1].append(unapprovedHTML.cloneNode());
+		    (ecbApproved === true) ? td[2].append(approvedHTML.cloneNode()) : td[2].append(unapprovedHTML.cloneNode());
+		    (nlbApproved === true) ? td[3].append(approvedHTML.cloneNode()) : td[3].append(unapprovedHTML.cloneNode());
 		    td[4].textContent = companyName;
 		    td[5].textContent = companyAddress;
 		    td[6].textContent = country;
@@ -109,27 +121,11 @@ App = {
 		    td[8].textContent = income;
 		    td[9].textContent = stockPrice;
 		    td[10].textContent = numShares;
-
 		    tbody.appendChild(clone);
 
 
-	      // Create the html for the listing
-	      const $newCompanyListingTemplate = $companyListingTemplate.clone()
-	      $newCompanyListingTemplate.find('.content').html(companyName)
-	      $newCompanyListingTemplate.find('input')
-	                      .prop('name', listingId)
-	                      .prop('checked', approved)
-	                      //.on('click', App.toggleCompleted)
-
-	      // Put the company listing in the correct list
-	      if (approved) {
-	        $('#approvedCompanyListings').append($newCompanyListingTemplate)
-	      } else {
-	        $('#companyListings').append($newCompanyListingTemplate)
-	      }
-
 	      // Show the company listing
-	      $newCompanyListingTemplate.show()
+	      //$newCompanyListingTemplate.show()
 	    }
   	},
 
@@ -147,6 +143,13 @@ App = {
   	}
 
 }
+
+$(document).ready(function() {
+		$('input[type="checkbox"]').click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		});
+	});
 
 $(() => {
 	$(window).load(() => {
