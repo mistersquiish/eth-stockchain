@@ -17,10 +17,10 @@ The following **required** user stories are complete:
 ## Application Screenshots
 
 ### Home page
-<img src="https://imgur.com/2JEP1ZQ" width=250>
+<img src="https://imgur.com/2JEP1ZQ.png" width=750>
 
 ### Add listing page
-<img src="https://imgur.com/YzDQYtW" width=250>"
+<img src="https://imgur.com/YzDQYtW.png" width=750>"
 
 ## Notes
 
