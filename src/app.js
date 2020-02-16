@@ -79,7 +79,7 @@ App = {
 	    const listingCount = await App.companyListing.listingCount()
 	    const $companyListingTemplate = $('.companyListingTemplate')
 
-	    // approved and unapproved symbols
+	    // create html elements to programatically add them to index.html
 	    var approvedHTML = document.createElement("i")
 	    approvedHTML.classList.add('fas');
 	    approvedHTML.classList.add('fa-check');
@@ -87,6 +87,12 @@ App = {
 	    var unapprovedHTML = document.createElement("i")
 	    unapprovedHTML.classList.add('fas');
 	    unapprovedHTML.classList.add('fa-times');
+
+	    var approveButton = document.createElement("BUTTON");
+	    approveButton.classList.add('btn-approveCompanyListing');
+	    approveButton.classList.add('btn');
+	    approveButton.classList.add('btn-primary');
+	    approveButton.innerHTML = "Approve Company";
 
 	    // Render out each company listing with a new company listing template
 	    for (var i = 1; i <= listingCount; i++) {
@@ -105,22 +111,30 @@ App = {
 	      	const stockPrice = listing[10]
 	      	const numShares = listing[11]
 
-			var template = document.querySelector('#companyListingRow');
+			
 		    // Clone the new row and insert it into the table
+		    var rowTemplate = document.querySelector('#companyListingRow');
 		    var tbody = document.querySelector("tbody");
-		    var clone = template.content.cloneNode(true);
+		    var clone = rowTemplate.content.cloneNode(true);
 		    var td = clone.querySelectorAll("td");
-		    td[0].textContent = (approved === true) ? "Approved" : "Not Approved";
-		    (dbApproved === true) ? td[1].append(approvedHTML.cloneNode()) : td[1].append(unapprovedHTML.cloneNode());
-		    (ecbApproved === true) ? td[2].append(approvedHTML.cloneNode()) : td[2].append(unapprovedHTML.cloneNode());
-		    (nlbApproved === true) ? td[3].append(approvedHTML.cloneNode()) : td[3].append(unapprovedHTML.cloneNode());
-		    td[4].textContent = companyName;
-		    td[5].textContent = companyAddress;
-		    td[6].textContent = country;
-		    td[7].textContent = earnings;
-		    td[8].textContent = income;
-		    td[9].textContent = stockPrice;
-		    td[10].textContent = numShares;
+
+		    // set id for approveListing button
+		    //var newApproveButton = "";
+		    var newApproveButton = approveButton.cloneNode(true);
+		    newApproveButton.setAttribute("id", "btn-company-" + listingId);
+		    td[0].append(newApproveButton);
+
+		    td[1].textContent = (approved === true) ? "Approved" : "Not Approved";
+		    (dbApproved === true) ? td[2].append(approvedHTML.cloneNode()) : td[2].append(unapprovedHTML.cloneNode());
+		    (ecbApproved === true) ? td[3].append(approvedHTML.cloneNode()) : td[3].append(unapprovedHTML.cloneNode());
+		    (nlbApproved === true) ? td[4].append(approvedHTML.cloneNode()) : td[4].append(unapprovedHTML.cloneNode());
+		    td[5].textContent = companyName;
+		    td[6].textContent = companyAddress;
+		    td[7].textContent = country;
+		    td[8].textContent = earnings;
+		    td[9].textContent = income;
+		    td[10].textContent = stockPrice;
+		    td[11].textContent = numShares;
 		    tbody.appendChild(clone);
 
 
@@ -144,12 +158,9 @@ App = {
 
 }
 
-$(document).ready(function() {
-		$('input[type="checkbox"]').click(function(e) {
-			e.preventDefault();
-			e.stopPropagation();
-		});
-	});
+$(document).on("click", ".btn-approveCompanyListing", function() {
+	console.log(this.id);
+});
 
 $(() => {
 	$(window).load(() => {
