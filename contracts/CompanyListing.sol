@@ -6,7 +6,7 @@ pragma solidity ^0.5.0;
 
 	Made for the WHU course Intro to Blockchain
 
-	Run using the Truffle framework and Ganache
+	Run using the Truffle framework, Ganache, and MetaMask
 */
 
 contract CompanyListing {
