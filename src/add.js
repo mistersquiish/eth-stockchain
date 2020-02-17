@@ -64,20 +64,25 @@ App = {
 
 	    App.setLoading(true)
 
-	    // Render Account
-	    $('#account').html(App.account)
+	     // Get Bank Information
+	    await App.getBanks()
 
-	    // Render Bank Information
-	    await App.renderBanks()
+	    // Get Authorization
+	    await App.getAuthorization()
 
-	    // Render Authorization
-	    await App.renderAuthorization()
+	    // Render Account based on authorization
+	    if (App.authorized) {
+	    	$('#account').html("(" + App.banks[App.account] + ") " + App.account)
+	    	$('#account').css('color', '#73ff4d');
+	    } else {
+	    	$('#account').html(App.account)
+	    }
 
 	    // Update loading state
 	    App.setLoading(false)
 	},
 
-	renderBanks: async () => {
+	getBanks: async () => {
 		// Load the total bank count from the blockchain
 	    const bankCount = await App.companyListing.bankCount()
 	    var banks = {}
@@ -94,10 +99,9 @@ App = {
 	    
 	},
 
-	renderAuthorization: async() => {
+	getAuthorization: async() => {
 		if (App.account in App.banks) {
 	    	App.authorized = true
-	    	document.querySelector('#welcome-message').textContent = "Welcome " + App.banks[App.account] + "! Add a company listing"
 	    } else {
 	    	App.authorized = false
 	    }
