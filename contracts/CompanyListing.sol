@@ -7,6 +7,9 @@ pragma solidity ^0.5.0;
 	Made for the WHU course Intro to Blockchain
 
 	Run using the Truffle framework, Ganache, and MetaMask
+
+	Note:
+	Need to refractor the searching/mapping of banks for verification and data lookup
 */
 
 contract CompanyListing {
