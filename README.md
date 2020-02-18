@@ -1,7 +1,7 @@
-# *eth-deutsche-boerse*
-ETH-Deutsche-Boerse is a blockchain application that utilizes the Ethereum smart contracts to automate and assert rules on listing companies on the stock exchange. The frontend is javascript, persistence is done using the ETH network, and the architecture is based on the Truffle framework.
+# *Stockchain*
+Stockchain is a blockchain application that utilizes the Ethereum network and smart contracts to automate and assert rules on listing companies on the stock exchange. The frontend is javascript, persistence is done using the ETH network, and the architecture is based on the Truffle framework.
 
-ETH-Deutsche-Boerse is meant to be run on a local ETH network as the parties are known and trusted. Trusted banks can submit company listings with informations about the company, company financials, and IPO information. Once submited, other banks can view this information and choose to approve the listing. Once all banks approve, the listing is officially approved.
+Stockchain is meant to be run on a local ETH network as the parties are known and trusted. Trusted banks can submit company listings with informations about the company, company financials, and IPO information. Once submited, other banks can view this information and choose to approve the listing. Once all banks approve, the listing is officially approved.
 
 Time spent: **16** hours spent in total
 
