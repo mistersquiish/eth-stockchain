@@ -29,6 +29,10 @@ section {
 	font-weight: 200;
 }
 
+.headline img {
+	width: 100px;
+}
+
 .hero::after {
 	content: "";
 	background: black;
