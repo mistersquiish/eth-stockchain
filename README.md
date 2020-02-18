@@ -35,13 +35,14 @@ $ npm run dev
 ## Application Screenshots
 
 ### Home page
-<img src="" width=750>
+<img src="https://i.imgur.com/KEjZgHA.png" width=750>
+<img src="https://i.imgur.com/vj2AOzt.png" width=750>
 
 ### Listings page
-<img src="" width=750>
+<img src="https://i.imgur.com/lFrrHP1.png" width=750>
 
 ### Add listing page
-<img src="" width=750>
+<img src="https://i.imgur.com/Kmux4I9.png" width=750>
 
 ## Notes
 
