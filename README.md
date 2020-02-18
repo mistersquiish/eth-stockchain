@@ -3,7 +3,7 @@ ETH-Deutsche-Boerse is a blockchain application that utilizes the Ethereum smart
 
 ETH-Deutsche-Boerse is meant to be run on a local ETH network as the parties are known and trusted. Trusted banks can submit company listings with informations about the company, company financials, and IPO information. Once submited, other banks can view this information and choose to approve the listing. Once all banks approve, the listing is officially approved.
 
-Time spent: **13** hours spent in total
+Time spent: **16** hours spent in total
 
 ## User Stories
 
@@ -17,7 +17,7 @@ The following **required** user stories are complete:
 ## Running the Application
 
 1. Install Ganache for local ETH network and download MetaMask for browser interaction.
-2. Once Ganache is running, copy the public keys from any three addresses and update the CompanyListing.sol file with your address values (need a better way to update the values).
+2. Once Ganache is running, copy the public keys from any three addresses and update the CompanyListing.sol file with your address values (need a better way to update the values). (https://github.com/mistersquiish/eth-deutsche-boerse/blob/master/contracts/CompanyListing.sol#L20)
 3. In the eth-stockchain directory,
 
 migrate the contract
