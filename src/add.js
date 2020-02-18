@@ -64,15 +64,15 @@ App = {
 
 	    App.setLoading(true)
 
-	     // Get Bank Information
-	    await App.getBanks()
+	    // Get Bank Info
+	    await App.getBankInfo()
 
 	    // Get Authorization
 	    await App.getAuthorization()
 
 	    // Render Account based on authorization
 	    if (App.authorized) {
-	    	$('#account').html("(" + App.banks[App.account] + ") " + App.account)
+	    	$('#account').html("(" + App.bankInfo[2] + ") " + App.account)
 	    	$('#account').css('color', '#73ff4d');
 	    } else {
 	    	$('#account').html(App.account)
@@ -82,29 +82,13 @@ App = {
 	    App.setLoading(false)
 	},
 
-	getBanks: async () => {
-		// Load the total bank count from the blockchain
-	    const bankCount = await App.companyListing.bankCount()
-	    var banks = {}
-	    // Render out each bank
-	    for (var i = 1; i <= bankCount; i++) {
-	    	const bank = await App.companyListing.banks(i)
-	    	const bankId = bank[0].toNumber()
-	    	const bankAddress = bank[1]
-	    	const bankName = bank[2]
-
-	    	banks[bankAddress] = bankName
-	    }
-	    App.banks = banks
-	    
+	getBankInfo: async() => {
+    	App.bankInfo = await App.companyListing.banks(App.account);
 	},
 
 	getAuthorization: async() => {
-		if (App.account in App.banks) {
-	    	App.authorized = true
-	    } else {
-	    	App.authorized = false
-	    }
+		App.authorized = getAuthorization(App.bankInfo)
+		return App.authorized
 	},
 
 	// loading indicator effect
@@ -140,3 +124,11 @@ $(() => {
 		App.load()
 	})
 })
+
+function getAuthorization(bankInfo) {
+	if (bankInfo[0].toNumber() != 0) {
+	    	return true
+	    } else {
+	    	return false
+	    }
+}

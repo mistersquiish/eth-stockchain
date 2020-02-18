@@ -7,17 +7,14 @@ pragma solidity ^0.5.0;
 	Made for the WHU course Intro to Blockchain
 
 	Run using the Truffle framework, Ganache, and MetaMask
-
-	Note:
-	Need to refractor the searching/mapping of banks for verification and data lookup
 */
 
 contract CompanyListing {
 	// indexes for mappings
-	uint public listingCount = 0;
 	uint public bankCount = 0;
-	mapping(uint => Bank) public banks;
+	uint public listingCount = 0;
 	mapping(uint => Listing) public listings;
+	mapping(address => Bank) public banks;
 
 	// addresses and names of banks
 	address[] public bankAddresses = [0x32bAe766f067E46ccF08560C47cCf25C4C214065,
@@ -77,7 +74,7 @@ contract CompanyListing {
 		// set bank mapping
 		for (uint i = 0; i < bankAddresses.length; i++) {
 			bankCount ++;
-			banks[bankCount] = Bank(bankCount, bankAddresses[i], bankNames[i]);
+			banks[bankAddresses[i]] = Bank(bankCount, bankAddresses[i], bankNames[i]);
 		}
 
 		// bootstrap with seed data
@@ -90,15 +87,7 @@ contract CompanyListing {
 	function createListing(string memory _companyName, string memory _companyMailingAddress, string memory _country, int _earnings,
 		int _netIncome, int _stockPrice, int _numShares) public {
 		// require that the bank is a verified bank
-		bool isVerified = false;
-		uint indexBankAddress = 0;
-		for (uint i = 0; i < bankAddresses.length; i++) {
-			if (bankAddresses[i] == msg.sender) {
-				isVerified = true;
-				indexBankAddress = i;
-			}
-		}
-		require(isVerified == true);
+		require(isVerified() == true);
 
 		// require none of the fields to be blank
 		bytes memory companyNameBytes = bytes(_companyName);
@@ -118,27 +107,19 @@ contract CompanyListing {
 		listings[listingCount] = Listing(listingCount, false, false, false, false, _companyName, _companyMailingAddress, _country,
 										uint(_earnings), uint(_netIncome), uint(_stockPrice), uint(_numShares));
 
-		emit listingAddedComplete(listingCount, _companyName, bankNames[indexBankAddress]);
+		emit listingAddedComplete(listingCount, _companyName, banks[msg.sender].bankName);
 	}
 
 	function approveListing(uint _companyId) public {
 		// require that the bank is a verified bank while also 
-		bool isVerified = false;
-		uint indexBankAddress = 0;
-		for (uint i = 0; i < bankAddresses.length; i++) {
-			if (bankAddresses[i] == msg.sender) {
-				isVerified = true;
-				indexBankAddress = i;
-			}
-		}
-		require(isVerified == true);
+		require(isVerified() == true);
 
 		// get the company listing based on given Id
 		Listing memory _listing = listings[_companyId];
 
 		// change the approval to true on the bank
-		if (indexBankAddress == 0) { _listing.dbApproved = true; } else
-		if (indexBankAddress == 1) { _listing.ecbApproved = true; } else
+		if (msg.sender == bankAddresses[0]) { _listing.dbApproved = true; } else
+		if (msg.sender == bankAddresses[1]) { _listing.ecbApproved = true; } else
 		{ _listing.nlApproved = true; }
 
 		// check if all banks have approved, if yes then the listing is approved completely
@@ -149,7 +130,15 @@ contract CompanyListing {
 	    
 	    // save listing to blockchain
 	    listings[_companyId] = _listing;
-	    emit bankApprovalComplete(_companyId, _listing.companyName, _listing.dbApproved, bankNames[indexBankAddress], bankAddresses[indexBankAddress]);
+	    emit bankApprovalComplete(_companyId, _listing.companyName, _listing.dbApproved, banks[msg.sender].bankName, msg.sender);
+	}
+
+	function isVerified() public returns(bool) {
+		bool isVerifiedBool = false;
+		if (banks[msg.sender].bankId != 0) {
+			isVerifiedBool = true;
+		}
+		return isVerifiedBool;
 	}
 }
 

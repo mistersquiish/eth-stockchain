@@ -1,7 +1,7 @@
 {
-  "name": "eth-todo-list",
+  "name": "eth-stockchain",
   "version": "1.0.0",
-  "description": "Blockchain Todo List Powered By Ethereum",
+  "description": "Blockchain Stock Exchange Listing Powered By Ethereum",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"
@@ -10,7 +10,7 @@
     "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && sexit 1"
   },
-  "author": "gregory@dappuniversity.com",
+  "author": "henryvuong@utexas.edu",
   "license": "ISC",
   "devDependencies": {
     "bootstrap": "^4.4.1",

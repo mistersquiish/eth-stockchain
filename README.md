@@ -14,13 +14,31 @@ The following **required** user stories are complete:
 - [x] Users can view the list of approved and unapproved listings
 - [ ] Data validation for company listing (currently only checks for empty)
 
+## Running the Application
+
+1. Install Ganache for local ETH network and download MetaMask for browser interaction.
+2. Once Ganache is running, copy the public keys from any three addresses and update the CompanyListing.sol file with your address values (need a better way to update the values).
+3. In the eth-stockchain directory,
+
+migrate the contract
+```
+$ truffle migrate
+```
+And start the application
+```
+$ npm run dev
+```
+
 ## Application Screenshots
 
 ### Home page
-<img src="https://imgur.com/2JEP1ZQ.png" width=750>
+<img src="" width=750>
+
+### Listings page
+<img src="" width=750>
 
 ### Add listing page
-<img src="https://imgur.com/YzDQYtW.png" width=750>
+<img src="" width=750>
 
 ## Notes
 
