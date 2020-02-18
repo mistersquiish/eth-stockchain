@@ -16,10 +16,13 @@ The following **required** user stories are complete:
 
 ## Running the Application
 
-1. Install Ganache for local ETH network and download MetaMask for browser interaction.
+1. Install npm, Ganache for local ETH network, and download MetaMask for browser interaction.
 2. Once Ganache is running, copy the public keys from any three addresses and update the CompanyListing.sol file with your address values (need a better way to update the values). (https://github.com/mistersquiish/eth-deutsche-boerse/blob/master/contracts/CompanyListing.sol#L20)
 3. In the eth-stockchain directory,
-
+Install npm packages
+```
+$ npm install
+```
 migrate the contract
 ```
 $ truffle migrate
