@@ -36,7 +36,7 @@ $ npm run dev
 
 ### Home page
 <img src="https://i.imgur.com/KEjZgHA.png" width=750>
-<img src="https://i.imgur.com/vj2AOzt.png" width=750>
+<img src="https://i.imgur.com/rJCacG7.png" width=750>
 
 ### Listings page
 <img src="https://i.imgur.com/lFrrHP1.png" width=750>
@@ -49,7 +49,7 @@ $ npm run dev
 - Project was conceived during my Germany exchange program at WHU's Intro to Blockchain course.
 - First time using solidity and significantly improved my web development understanding (html, css, javascript, jquery, DOM)
 - Run using Ganache for local ETH network and MetaMask for internet browser interaction
-- Was a bit confused on how mappings were done and confused about the solidity programming language in general. Therefore, significant refractoring would greatly simplify the smart contract
+- Was a bit confused on how mappings were done and confused about the solidity programming language in general. Therefore, refractoring would greatly simplify the smart contract
 
 ## License
 
