@@ -92,7 +92,6 @@ App = {
 
 	getAuthorization: async() => {
 		App.authorized = getAuthorization(App.bankInfo)
-		return App.authorized
 	},
 
 	renderListings: async () => {
@@ -210,11 +209,6 @@ $(() => {
 	})
 })
 
-
-function getAuthorization(bankInfo) {
-	if (bankInfo[0].toNumber() != 0) {
-	    	return true
-	    } else {
-	    	return false
-	    }
-}
+// get dependency scripts 
+$.getScript('js/contractHelper.js', function()
+{ });

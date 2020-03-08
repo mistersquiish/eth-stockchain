@@ -44,6 +44,11 @@ $ npm run dev
 ### Add listing page
 <img src="https://i.imgur.com/Kmux4I9.png" width=750>
 
+## Walkthrough
+
+### Approving a listing
+<img src="https://recordit.co/jzLHurGTvW.gif" width=750>
+
 ## Notes
 
 - Project was conceived during my Germany exchange program at WHU's Intro to Blockchain course.

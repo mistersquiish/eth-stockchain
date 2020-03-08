@@ -20,20 +20,6 @@
       #content {
         display: none;
       }
-
-      form {
-        width: 350px;
-        margin-bottom: 10px;
-      }
-
-      ul {
-        margin-bottom: 0px;
-      }
-
-      #completedTaskList .content {
-        color: grey;
-        text-decoration: line-through;
-      }
     </style>
   </head>
   <body>
@@ -59,6 +45,9 @@
     <div class="container-fluid">
       <div class="row">
         <main role="main" class="col-lg-12 d-flex justify-content-center">
+            <div id="loader" class="text-center">
+                <p class="text-center">Loading...</p>
+            </div>
           <div id="content">
             <H3 id="welcome-message"><BR>Add a company listing</H3>
             <form id="addListingForm">
